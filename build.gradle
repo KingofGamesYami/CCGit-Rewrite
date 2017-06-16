@@ -37,7 +37,7 @@ minecraft {
 }
 
 repositories {
-    maven { url = "https://crzd.me/files/maven/" }
+    maven { url = "http://cc.crzd.me/maven/" }
     maven { url = "https://dl.bintray.com/squiddev/maven" }
     maven { url = "https://repo.eclipse.org/content/groups/releases/" }
 }
