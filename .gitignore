@@ -1,0 +1,51 @@
+## Based on GitHub's Eclipse .gitignore
+
+run/
+.gradle/
+build/
+gradle-app.setting
+
+## IntelliJ IDEA
+
+.idea/
+*.iml
+*.iws
+*.ipr
+
+## Eclipse
+
+eclipse/
+*.pydevproject
+.project
+.metadata
+bin/
+tmp/
+*.tmp
+*.bak
+*.swp
+*~.nib
+local.properties
+.classpath
+.settings/
+.loadpath
+
+# External tool builders
+.externalToolBuilders/
+
+# Locally stored "Eclipse launch configurations"
+*.launch
+
+# CDT-specific
+.cproject
+
+# PDT-specific
+.buildpath
+CREDITS-fml.txt
+LICENSE-new.txt
+MinecraftForge-Credits.txt
+Paulscode IBXM Library License.txt
+Paulscode SoundSystem CodecIBXM License.txt
+README.txt
+forge-1.10.2-12.18.3.2316-changelog.txt
+gradle.properties
+src/main/java/com/

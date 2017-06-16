@@ -1,0 +1,16 @@
+[
+{
+  "modid": "ccgit",
+  "name": "ComputerCraft Git",
+  "description": "Adds git features to ComputerCraft",
+  "version": "${version}",
+  "mcversion": "${mcversion}",
+  "url": "",
+  "updateUrl": "",
+  "authorList": ["KingofGamesYami"],
+  "credits": "Dan200 for ComputerCraft, SquidDev for CCTweaks",
+  "logoFile": "",
+  "screenshots": [],
+  "dependencies": ["ComputerCraft", "CCTweaks"]
+}
+]
