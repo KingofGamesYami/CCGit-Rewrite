@@ -85,6 +85,10 @@ shadowJar {
     dependencies {
         exclude( dependency( 'dan200.computercraft:ComputerCraft:1.80pr0-build0') )
         exclude( dependency( 'org.squiddev:CCTweaks:1.10.2-1.5.0-pr0:dev' ) )
+        for (pkg in ['com.jcraft.jsch', 'com.googlecode.javaewah', 'com.googlecode.javaewa32',
+                     'org.apache.http', 'org.slf4j', 'org.eclipse.jgit', 'org.apache.commons.logging']) {
+            relocate pkg, 'org.kingofgamesyami.ccgit.repackage.' + pkg
+        }
     }
 }
 
