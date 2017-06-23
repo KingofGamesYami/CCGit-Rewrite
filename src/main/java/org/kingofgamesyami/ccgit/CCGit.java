@@ -1,5 +1,7 @@
 package org.kingofgamesyami.ccgit;
 
+import dan200.computercraft.ComputerCraft;
+import dan200.computercraft.api.filesystem.IMount;
 import dan200.computercraft.api.lua.ILuaContext;
 import dan200.computercraft.api.lua.LuaException;
 import dan200.computercraft.api.peripheral.IComputerAccess;
@@ -32,6 +34,8 @@ public class CCGit implements ILuaAPI, IMethodDescriptor
     public CCGit( IExtendedComputerAccess computer ){
         this.computer = computer;
         this.computerDir = computer.getRootMountPath();
+        final IMount resourceMount = ComputerCraft.createResourceMount( CCGit.class, "ccgit", "lua" );
+        computer.mount( "rom/ccgit/programs", resourceMount );
     }
 
     @Override

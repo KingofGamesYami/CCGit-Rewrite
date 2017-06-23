@@ -12,7 +12,7 @@ apply plugin: 'com.github.johnrengelman.shadow'
 apply plugin: 'net.minecraftforge.gradle.forge'
 //Only edit below this line, the above code adds and enables the nessasary things for Forge to be setup.
 
-version = "2.0"
+version = "2.1"
 group= "org.kingofgamesyami.ccgit" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = "ccgit"
 
@@ -71,17 +71,11 @@ dependencies {
 
 }
 
-/*
-jar {
-    configurations.compile.each { dep ->
-        from(project.zipTree( dep )){
-            exclude 'META-INF', 'META-INF/**'
-        }
-    }
-}
-*/
 
 shadowJar {
+    from( '/src/main/java' ) {
+        include '**/*.lua'
+    }
     dependencies {
         exclude( dependency( 'dan200.computercraft:ComputerCraft:1.80pr0-build0') )
         exclude( dependency( 'org.squiddev:CCTweaks:1.10.2-1.5.0-pr0:dev' ) )
