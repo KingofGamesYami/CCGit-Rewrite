@@ -19,6 +19,8 @@ public class CCGit implements ILuaAPI, IMethodDescriptor
 {
     public static final String MODID = "ccgit";
     public static final String VERSION = "2.0";
+    public static final IMount resourceMount = ComputerCraft.createResourceMount( CCGit.class, "ccgit", "lua" );
+
     private final File computerDir;
     private final IComputerAccess computer;
     private int identifier = 0;
@@ -34,18 +36,16 @@ public class CCGit implements ILuaAPI, IMethodDescriptor
     public CCGit( IExtendedComputerAccess computer ){
         this.computer = computer;
         this.computerDir = computer.getRootMountPath();
-        final IMount resourceMount = ComputerCraft.createResourceMount( CCGit.class, "ccgit", "lua" );
-        computer.mount( "rom/ccgit/programs", resourceMount );
     }
 
     @Override
     public void startup() {
-
+        computer.mount( "ccgit/programs", resourceMount );
     }
 
     @Override
     public void shutdown() {
-
+        computer.unmount( "ccgit/programs" );
     }
 
     @Override
