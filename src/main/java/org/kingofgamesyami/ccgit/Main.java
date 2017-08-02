@@ -1,14 +1,12 @@
 package org.kingofgamesyami.ccgit;
 
+import dan200.computercraft.api.ComputerCraftAPI;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLServerStartedEvent;
 import net.minecraftforge.fml.common.event.FMLServerStoppedEvent;
 import net.minecraftforge.fml.relauncher.Side;
-import org.squiddev.cctweaks.api.CCTweaksAPI;
-import org.squiddev.cctweaks.api.lua.CCTweaksPlugin;
-import org.squiddev.cctweaks.api.lua.ILuaEnvironment;
 
 /**
  * Created by steve on 6/13/2017.
@@ -20,8 +18,8 @@ public class Main {
     @Mod.EventHandler
     public void init(FMLInitializationEvent event)
     {
-        Register.init(CCTweaksAPI.instance().luaEnvironment());
         GitRunnable.instance = new GitRunnable( logger );
+        ComputerCraftAPI.registerAPIProvider( new Register() );
     }
 
     @Mod.EventHandler
@@ -37,15 +35,6 @@ public class Main {
         if (FMLCommonHandler.instance().getEffectiveSide() == Side.SERVER) {
             logger.info( "Stopping Git Thread" );
             GitRunnable.instance.interrupt();
-        }
-    }
-
-    public static class CCGitPlugin extends CCTweaksPlugin {
-        @Override
-        public void register(ILuaEnvironment environment) {
-            Register.init(environment);
-            GitRunnable.instance = new GitRunnable( new LogHandler.BasicLogger() );
-            GitRunnable.instance.start();
         }
     }
 }

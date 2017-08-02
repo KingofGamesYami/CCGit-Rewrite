@@ -37,8 +37,7 @@ minecraft {
 }
 
 repositories {
-    maven { url = "http://cc.crzd.me/maven/" }
-    maven { url = "https://dl.bintray.com/squiddev/maven" }
+//    maven { url = "http://cc.crzd.me/maven/" }
     maven { url = "https://repo.eclipse.org/content/groups/releases/" }
 }
 
@@ -48,8 +47,9 @@ dependencies {
     //compile "some.group:artifact:version:classifier"
     //compile "some.group:artifact:version"
 
-    compile "dan200.computercraft:ComputerCraft:1.80pr0-build0"
-    compile "org.squiddev:CCTweaks:1.10.2-1.5.0-pr0:dev"
+//    compile "dan200.computercraft:ComputerCraft:1.80pr0-build0"
+    compile files( 'libs/luaj-jse-2.0.3' )
+    compile files( 'libs/computercraft_modified.jar' )
 
     compile 'org.eclipse.jgit:org.eclipse.jgit:4.5.0.201609210915-r'
 
@@ -77,8 +77,8 @@ shadowJar {
         include '**/*.lua'
     }
     dependencies {
-        exclude( dependency( 'dan200.computercraft:ComputerCraft:1.80pr0-build0') )
-        exclude( dependency( 'org.squiddev:CCTweaks:1.10.2-1.5.0-pr0:dev' ) )
+//        exclude( dependency( 'dan200.computercraft:ComputerCraft:1.80pr0-build0') )
+        exclude dependency( files( 'libs/computercraft_modified.jar' ) )
         for (pkg in ['com.jcraft.jsch', 'com.googlecode.javaewah', 'com.googlecode.javaewa32',
                      'org.apache.http', 'org.slf4j', 'org.eclipse.jgit', 'org.apache.commons.logging']) {
             relocate pkg, 'org.kingofgamesyami.ccgit.repackage.' + pkg

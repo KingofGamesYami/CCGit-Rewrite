@@ -2,25 +2,24 @@ package org.kingofgamesyami.ccgit;
 
 import dan200.computercraft.ComputerCraft;
 import dan200.computercraft.api.filesystem.IMount;
+import dan200.computercraft.api.lua.ILuaAPI;
 import dan200.computercraft.api.lua.ILuaContext;
 import dan200.computercraft.api.lua.LuaException;
 import dan200.computercraft.api.peripheral.IComputerAccess;
+import net.minecraftforge.fml.common.FMLCommonHandler;
 import org.eclipse.jgit.api.Git;
 import org.eclipse.jgit.api.GitCommand;
 import org.eclipse.jgit.api.errors.GitAPIException;
-import org.squiddev.cctweaks.api.lua.IExtendedComputerAccess;
-import org.squiddev.cctweaks.api.lua.ILuaAPI;
-import org.squiddev.cctweaks.api.lua.IMethodDescriptor;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.io.File;
 
-public class CCGit implements ILuaAPI, IMethodDescriptor
+public class CCGit implements ILuaAPI
 {
     public static final String MODID = "ccgit";
     public static final String VERSION = "2.1";
-    public static final IMount resourceMount = ComputerCraft.createResourceMount( CCGit.class, "ccgit", "lua" );
+    public IMount resourceMount;
     public static final String mountDir = ".ccgit";
 
     private final File computerDir;
@@ -35,13 +34,22 @@ public class CCGit implements ILuaAPI, IMethodDescriptor
         return computer;
     }
 
-    public CCGit( IExtendedComputerAccess computer ){
+    public CCGit( IComputerAccess computer ){
         this.computer = computer;
-        this.computerDir = computer.getRootMountPath();
+        this.computerDir = new File( ComputerCraft.getWorldDir( FMLCommonHandler.instance().getMinecraftServerInstance().getEntityWorld() ), "computer/" + computer.getID() );
+    }
+
+    @Override
+    public String[] getNames() {
+        return new String[]{"ccgit"};
     }
 
     @Override
     public void startup() {
+        resourceMount = ComputerCraft.createResourceMount( CCGit.class, "ccgit", "lua" );
+        if( resourceMount == null ){
+            throw new RuntimeException( "DAMN IT ALL WHY DOESN'T THIS WORK" );
+        }
         computer.mount( mountDir, resourceMount );
     }
 
@@ -90,11 +98,6 @@ public class CCGit implements ILuaAPI, IMethodDescriptor
         }
 
         return new Object[0];
-    }
-
-    @Override
-    public boolean willYield(int i) {
-        return false;
     }
 
     private File getAbsoluteDir(String localDir ) throws LuaException {

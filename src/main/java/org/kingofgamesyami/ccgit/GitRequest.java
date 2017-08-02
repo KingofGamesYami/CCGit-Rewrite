@@ -1,7 +1,6 @@
 package org.kingofgamesyami.ccgit;
 
 import dan200.computercraft.api.peripheral.IComputerAccess;
-import org.eclipse.jgit.api.CommitCommand;
 import org.eclipse.jgit.api.GitCommand;
 import org.eclipse.jgit.api.errors.GitAPIException;
 
